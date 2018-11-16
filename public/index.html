@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Joe's Lab 5 Mongo</title>
+        <title>Joe's Creative 5 Mongo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
           <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -10,45 +10,110 @@
           <link rel="icon" type="image/png" href="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png">
           <script src="javascripts/comments.js"></script>
     </head>
-    <body class="bg-light text-dark">
+    <body class="bg-white text-dark">
         
-        <div class="jumbotron p-2 m-9 bg-primary text-white">
-          <h1 class="display-6">Joe's Lab 5 Mongo Database!</h1>
-          <p class="h5">This is a simple page that uses a MongoDB to keep track of a user and associated comments. </p>
+        <div class="jumbotron p-2 m-9 bg-warning text-dark">
+          <h1 class="display-6">Joe's Creative 5 Mongo Database!</h1>
+          <p class="h5">This is a simple page that uses a MongoDB to keep track of a user and associated password that can be used to login to a new page. </p>
           <hr class="my-2 bg-dark">
-          <p class="text-white">Enter a username and a comment to add to the database through 'Post Comment'. Click 'Get Comments' to see the stored comments, 'Get User Comments' to see a specified users comments, and 'Delete All Comments' to wipe the DB.</p>
+          <p class="text-dark">Enter a username and a password to add to the database through 'Register'. Fill in the second form and click 'Login' to see the hidden page after registering! (Dont use your real information)!</p>
         </div>
         
-        <form id="commentForm" action="">
-        <div class="container-fluid">
-          <div class="row  justify-content-md-center">
-            <div class="col-4">
-              <div class="input-group input-group-lg mb-3">
-                <input class="form-control p-2 input-group-lg" type="text" id="name" placeholder="Name">
+        <div id="page">
+        
+          <form id="registerForm" action="">
+          <div class="container-fluid">
+            <div class="row  justify-content-md-center">
+              <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                  <input class="form-control p-2 input-group-lg" type="text" id="name" placeholder="Username">
+                </div>
               </div>
-            </div>
-            <div class="col-4">
-              <div class="input-group input-group-lg mb-3">
-                <input class="form-control p-2" type="text" id="comment" placeholder="Comment"><br>
+              <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                  <input class="form-control p-2" type="password" id="password" placeholder="Password"><br>
+                </div>
+              </div>
+             <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                  <button class="btn btn-primary btn-md m-1" id="register">Register Account</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        </form>
-        
-        <div class="row align-items-center justify-content-center">
-            <button class="btn btn-secondary btn-md m-1" id="postComment">Post Comment</button>
-            <button class="btn btn-secondary btn-md m-1" id="getComments">Get Comments</button>
-            <button class="btn btn-secondary btn-md m-1" id="getUserComments">Get User Comments</button>
-            <button class="btn btn-secondary btn-md m-1" id="deleteComments">Delete All</button>
-        </div>
-        <br>
-        <div class="row align-items-center justify-content-center">
-            <div class="card" style="width: 36rem;" id="comments"></div>
-        </div>
-        
-        <div class="footer fixed-bottom bg-primary text-white p-1">
+          </form>
+            
+          <br>
+          <form id="loginForm" action="">
+          <div class="container-fluid">
+            <div class="row  justify-content-md-center">
+              <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                  <input class="form-control p-2 input-group-lg" type="text" id="loginname" placeholder="Username">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                  <input class="form-control p-2" type="password" id="loginpassword" placeholder="Password"><br>
+                </div>
+              </div>
+             <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                  <button type="button" class="btn btn-primary btn-md m-1 pl-4 pr-4" id="login" onclick="showModal()">Login</button>
+                </div>
+              </div>
+            </div>
+            
+          <form id="showbutton" action="">
+          <div class="container-fluid">
+            <div class="row  justify-content-md-center">
+              <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" onclick="showPass()" id="defaultCheck1">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Show Password
+                      </label>
+                    </div>                
+                </div>
+              </div>
+             <div class="col-4">
+                <div class="input-group input-group-lg mb-3">
+                  </div>
+              </div>
+            </div>  
+          
+          </div> <br>
+          
+          <div class="row align-items-center justify-content-center">
+              <div class="card align-items-center bg-white" style="width: 36rem;" id="done"></div>
+          </div>
+          
+          </form>
+
+          <br>
+          <div class="d-flex justify-content-center">
+              <div id="finished" style="display: none;">
+                <div class="card">
+                  <div class="card-header bg-success text-center text-white">
+                    Successfull Sign-in!
+                  </div>
+                  <div class="card-body">
+                  <h5 class="card-title">Thanks for Registering.</h5>
+                  <p class="card-text">MongoDB makes creating and storing a username and password system for the web a breeze!</p>
+                  <a href="https://media1.giphy.com/media/l2Sqir5ZxfoS27EvS/giphy.gif?cid=3640f6095bee4bfa5252574f553f93e4" class="btn btn-primary">Click Me!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="footer fixed-bottom bg-warning text-dark p-1">
           Created by: Joseph S. Morrow
+          <!-- <button class="btn btn-light btn-md m-1" id="deleteUsers">Clear</button> -->
         </div>
     </body>
 </html>

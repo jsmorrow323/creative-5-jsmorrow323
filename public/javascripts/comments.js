@@ -1,51 +1,59 @@
 $(document).ready(function(){
-  $("#postComment").click(function(){
-      var myobj = {Name:$("#name").val(),Comment:$("#comment").val()};
+  $("#register").click(function(){
+      var myobj = {Name:$("#name").val(),Password:$("#password").val()};
       jobj = JSON.stringify(myobj);
+      console.log(myobj);
       
-    var url = "comment";
+    var url = "user";
         $.ajax({
         url:url,
         type: "POST",
         data: jobj,
         contentType: "application/json; charset=utf-8",
         success: function(data,textStatus) {
-            $("#done").html(textStatus);
+            console.log("successful post");
         }
     });
   });
   
-  $("#getComments").click(function() {
-    $.getJSON('comment', function(data) {
-      var everything = `<ul class="list-group list-group-flush">`;
-      for(var comment in data) {
-        com = data[comment];
-        everything += `<li class="list-group-item"> Name: ` + com.Name + " -- Comment: " + com.Comment + "</li>";
-      }
-      everything += "</ul>";
-      $("#comments").html(everything);
-    });
-  });
-  
-  $("#getUserComments").click(function() {
-    var url = 'comment/'+$("#name").val();
+  $("#login").click(function() {
+    var url = 'user/'+$("#loginname").val();
     $.getJSON(url, function(data) {
-      $("#comments").html("");
-      var everything = `<ul class="list-group list-group-flush">`;
-      for(var comment in data) {
-        com = data[comment];
-        everything += `<li class="list-group-item"> Name: ` + com.Name + " -- Comment: " + com.Comment + "</li>";
+      for(var user in data) {
+        user = data[user];
+        if ($("#loginpassword").val() == user.Password) {
+            var x = document.getElementById("finished");
+              if (x.style.display === "none") {
+                  x.style.display = "block";
+              } else {
+                  x.type = "block";
+              }
+        } else {
+           $("#done").html("Failure!");
+           $("#done").attr('class','card align-items-center bg-danger text-white');
+        }
       }
-      everything += "</ul>";
-      $("#comments").html(everything);
+     
     });
   });
   
-  
-  
-  $("#deleteComments").click(function() {
+  $("#deleteUsers").click(function() {
      $.get('delete', function() {
-        $("#comments").html(" ");
      });
   });
 });
+
+function showPass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+    var y = document.getElementById("loginpassword");
+    if (y.type === "password") {
+        y.type = "text";
+    } else {
+        y.type = "password";
+    }
+}
